@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= site.site %> - National Historic Site</title>
+    <link rel="stylesheet" href="/css/main.css" />
+</head>
+<body tabindex="-1">
+
+    <%- include('partials/navbar', { page: "site" }) %>
+
+    <div class="container mx-auto"> 
+        <div class="hero bg-red-200 rounded-lg p-6 mb-6">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-5xl font-bold"><%= site.site %></h1>
+                <p class="py-4 text-300">Below, you will find detailed information about the site:</p>
+                <p><%= site.site%></p>
+              </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div>
+              <img src="<%= site.image %>" alt="<%= site.site %> Image" class="w-full rounded-lg shadow-md" />
+
+            </div>
+
+            <div class="prose  text-gray-900">
+                <p><strong>Site Name:</strong> <%= site.site %></p>
+                <p><strong>Date:</strong> <%= site.date %> (<%= site.dateType %>)</p>
+                <p><strong>Location:</strong> <%= site.location %>, <%= site.provinceOrTerritoryObj.name %></p>
+                <p><strong>Region:</strong> <%= site.provinceOrTerritoryObj.region %></p>
+                <p><strong>Geolocation:</strong> <%= site.latitude %>, <%= site.longitude %></p>
+                <p><strong>Designated:</strong> <%= site.designated %></p>
+                <p><strong>Quote:</strong> <span id="quote" class="italic">Loading quote...</span></p>
+                <a href="#" onclick="history.back(); return false;" class="btn-sm bg-blue-500 text-white px-4 py-2 rounded-lg">Return</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            fetch('https://quotable.io/random')
+                .then(response => response.json())
+                .then(data => {
+                    const quote = document.getElementById("quote");
+                    quote.textContent = `"${data.content}" — ${data.author}`;
+                })
+                .catch(err => {
+                    console.error('Error fetching quote:', err);
+                    const quote = document.getElementById("quote");
+                    quote.textContent = "Quote could not be fetched.";
+                });
+        });
+    </script>
+
+</body>
+</html>

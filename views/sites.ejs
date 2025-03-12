@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>National Historic Sites</title>
+  <link rel="stylesheet" href="./css/main.css" />
+</head>
+
+<body tabindex="-1">
+  <%- include('partials/navbar', { page:"/sites" }) %>
+
+  <div class="container  mx-auto">
+
+    <!-- Hero Section with Filter Links -->
+    <div class="hero bg-base-100 bg-red-300 rounded-lg p-6 mb-8">
+      <div class="text-center">
+        <h1 class="text-5xl font-bold">National Historic Sites</h1>
+        <p class="py-4">Explore the national historic sites across Canada.</p>
+
+        <div class="filter-links">
+          <p class="text-lg font-medium">CLICK TO FILTER SITES BY REGION</p>
+          <div class="flex justify-center gap-4 py-2 ">
+            <a href="/sites?region=Atlantic%20Region" class="btn btn-sm">Atlantic Region</a>
+            <a href="/sites?region=Central%20Canada" class="btn btn-sm">Central Canada</a>
+            <a href="/sites?region=Prairie%20Provinces" class="btn btn-sm">Prairie Provinces</a>
+            <a href="/sites?region=West%20Coast" class="btn btn-sm">West Coast</a>
+            <a href="/sites?region=North" class="btn btn-sm">North</a>
+         
+          </div>
+
+          <p class="text-lg font-medium mt-4">CLICK TO FILTER SITES BY PROVINCE OR TERRITORY</p>
+          <div class="flex justify-center gap-4 py-2">
+            <a href="/sites?provinceOrTerritory=Ontario" class="btn btn-sm">Ontario</a>
+            <a href="/sites?provinceOrTerritory=Quebec" class="btn btn-sm">Quebec</a>
+            <a href="/sites?provinceOrTerritory=Yukon" class="btn btn-sm">Yukon</a>
+        
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Table -->
+    <div class="sites-table">
+        <table class="table-auto w-full border-spacing-2">
+            <thead>
+                <tr>
+                    <th class="px-4 py-2">Image</th>
+                    <th class="px-4 py-2">Site</th>
+                    <th class="px-4 py-2">Date</th>
+                    <th class="px-4 py-2">Location</th>
+                    <th class="px-4 py-2">Region</th>
+                    <th class="px-4 py-2">Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% sites.forEach(site => { %>
+                    <tr>
+                        <td class="px-4 py-2">
+                          <img src="<%= site.image %>" alt="Site picture" class="h-24 w-24 rounded-lg" />
+                        </td>
+                         
+                        <td class="px-4 py-2"><%= site.site %></td>
+                        
+                        <td class="px-4 py-2">
+                          Date: <%= site.date %> (<%= site.dataType %>)<br/>
+                          Designated: <%= site.designated %>
+                        </td>
+                        
+                        <td class="px-4 py-2">                          <%= site.location %>, 
+                          <a href="/sites?provinceOrTerritory=<%= site.provinceOrTerritoryObj.name %>" class="btn btn-sm">
+                            <%= site.provinceOrTerritoryObj.name %>
+                          </a>
+                        </td>
+                        
+                        <td class="px-4 py-2">
+                          <a href="/sites?region=<%= site.provinceOrTerritoryObj.region %>" class="btn btn-sm">
+                            <%= site.provinceOrTerritoryObj.region %>
+                          </a>
+                        </td>
+                        
+                        <td class="px-4 py-2">
+                          <a href="/sites/<%= site.siteId %>" class="btn btn-sm">Details</a>
+                        </td>
+                      </tr>
+                    <% }) %>
+            </tbody>
+        </table>
+    </div> 
+
+
+  </div>
+</body>
+
+</html>
