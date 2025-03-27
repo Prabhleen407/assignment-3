@@ -16,6 +16,7 @@
             <li><a href="/" class="<%= page === 'home' ? 'active' : '' %>">Home</a></li>
             <li><a href="/about" class="<%= (page === '/about') ? 'active' : '' %>">About</a></li> <!-- Fixed href -->
             <li><a class="<%= (page == '/sites') ? 'active' : '' %>" href="/sites">View Site Collection</a></li>
+            <li><a class="<%= (page == '/addSite') ? 'active' : '' %>" href="/addSite">Add to Collection</a></li>
         </ul>
     </div>
 
@@ -25,6 +26,7 @@
             <li><a href="/" class="<%= page === 'home' ? 'active' : '' %>">Home</a></li>
             <li><a href="/about" class="<%= page === 'about' ? 'active' : '' %>">About</a></li>
             <li><a class="<%= (page == '/sites') ? 'active' : '' %>" href="/sites">View Site Collection</a></li>
+            <li><a class="<%= (page == '/addSite') ? 'active' : '' %>" href="/addSite">Add to Collection</a></li>
         </ul>
     </div>
 </div>

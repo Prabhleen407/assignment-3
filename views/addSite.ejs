@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add site</title>
+  <link rel="stylesheet" href="/css/main.css" />
+
+</head>
+
+<body tabindex="-1">
+  <%- include('partials/navbar', { page: "/addSite" }) %>
+
+  <div class="container mx-auto">
+
+    <div class="hero bg-pink-200 rounded-lg p-6 ">
+      <div class="hero-content text-center ">
+        <div class="max-w-md">
+          <h1 class="text-5xl font-extrabold">Add Site</h1>
+
+          <p class="py-6">Add Your Favorite Sites Here</p>
+
+        </div>
+      </div>
+    </div>
+
+    <form action="/addSite" method="POST" class=" bg-pink-200">
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label class="block font-bold">Site ID</label>
+          <input type="text" name="siteId" required class="input input-bordered w-full" />
+        </div>
+    
+        <div>
+          <label class="block font-bold">Site</label>
+          <input type="text" name="site" required class="input input-bordered w-full" />
+        </div>
+      </div>
+    
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label class="block font-bold">Image</label>
+          <input type="url" name="image" required class="input input-bordered w-full" />
+        </div>
+    
+        <div>
+          <label class="block font-bold">Date</label>
+          <input type="date" name="date" required class="input input-bordered w-full" />
+        </div>
+      </div>
+    
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label class="block font-bold">Date Type</label>
+          <input type="text" name="dateType" required class="input input-bordered w-full" />
+        </div>
+    
+        <div>
+          <label class="block font-bold">Designated</label>
+          <input type="number" name="designated" required class="input input-bordered w-full" />
+        </div>
+      </div>
+    
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label class="block font-bold">Location</label>
+          <input type="text" name="location" required class="input input-bordered w-full" />
+        </div>
+    
+        <div>
+          <label class="block font-bold">Province or Territory</label>
+          <select name="provinceOrTerritoryCode" required class="select select-bordered w-full">
+            <% provincesAndTerritories.forEach(provinceOrTerritory => { %>
+              <option value="<%= provinceOrTerritory.code %>">
+                <%= provinceOrTerritory.name %>
+              </option>
+            <% }) %>
+          </select>
+        </div>
+      </div>
+    
+      <div>
+        <label class="block font-bold">Description</label>
+        <textarea name="description" rows="4" class="textarea textarea-bordered w-full"></textarea>
+      </div>
+    
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label class="block font-bold">Latitude</label>
+          <input type="number" step="0.00000001" name="latitude" required class="input input-bordered w-full" />
+        </div>
+    
+        <div>
+          <label class="block font-bold">Longitude</label>
+          <input type="number" step="0.00000001" name="longitude" required class="input input-bordered w-full" />
+        </div>
+      </div>
+    
+      <div>
+        <button type="submit" class="btn btn-primary w-full">Add Site</button>
+      </div>
+    </form>
+    
+
+
+
+</div>
+</body>
+  </html>
